@@ -17,7 +17,6 @@ const getAuthorById = asyncHandler(async (req, res) => {
 })
 
 const createAuthor = asyncHandler(async (req, res) => {
-  console.log(req.body)
   const { nickName, email } = req.body
 
   try{

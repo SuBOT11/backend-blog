@@ -24,7 +24,6 @@ const generateRefreshToken = (user) => {
 
 export const register = async (req, res) => {
   try {
-    console.log(req.body)
     const { name, email, password ,role} = req.body;
     const user = new User({ name, email, password ,role});
     await user.save();
@@ -59,7 +58,6 @@ export const login = async (req, res) => {
 
 export const refresh = async (req, res) => {
   const { refreshToken } = req.cookies;
-  console.log(refreshToken)
 
   if (!refreshToken) return res.status(401).send('Unauthorized');
 

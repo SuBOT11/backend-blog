@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors(
 
   {
-  origin : ['http://192.168.1.72:5173', 'http://localhost:5173'],
+  origin : ['http://192.168.1.81:5173', 'http://localhost:5173'],
   methods: 'GET,POST,PUT,DELETE',
   credentials:true,
 

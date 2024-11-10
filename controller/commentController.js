@@ -17,7 +17,6 @@ const getCommentById = asyncHandler(async (req, res) => {
 })
 
 const createComment = asyncHandler(async (req, res) => {
-  console.log(req.body)
   const { email, name, comment, blogId } = req.body
   if (!email || !name || !comment || !blogId) {
     res.status(400)
@@ -34,7 +33,6 @@ const createComment = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Invalid user comment')
   }
-  console.log(userComment)
   res.status(200).json({ userComment })
 })
 

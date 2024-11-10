@@ -6,7 +6,6 @@ import { AuthorModel } from '../models/authorModel.js'
 import Like from '../models/LikeModel.js'
 
 const getBlogs = asyncHandler(async (req, res) => {
-  console.log(req.params)
   const blogs = await BlogModel.find()
 
  const newBlogs =  await Promise.all
@@ -48,7 +47,6 @@ const getBlogById = asyncHandler(async (req, res) => {
 })
 
 const createBlog = asyncHandler(async (req, res) => {
-  console.log(req.body)
   const { title, imageUrl,content, snippet, authorId, co_AuthorId } = req.body
   if (!title || !content || !authorId) {
     res.status(400)
@@ -76,7 +74,6 @@ const createBlog = asyncHandler(async (req, res) => {
 
 const updateBlog = asyncHandler(async (req, res) => {
   const { title, imageUrl,content ,snippet } = req.body
-  console.log(req.body)
 
   const blog = await BlogModel.findById(req.params.id)
 
@@ -89,7 +86,6 @@ const updateBlog = asyncHandler(async (req, res) => {
     blog.content = content
     blog.snippet  = snippet
     const updatedBlog = await blog.save()
-    console.log(updatedBlog)
     res.status(201).json(updateBlog)
   }
 })
@@ -100,7 +96,6 @@ const likes_count_increase = asyncHandler(async (req, res) => {
 
   const blog = await BlogModel.findById(id);
   const userLiked = await Like.findOne({blogId:id, userId})
-  console.log(userLiked)
 
   if (userLiked){
     await Like.deleteOne({blogId:id, userId});
