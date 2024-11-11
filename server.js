@@ -22,20 +22,35 @@ connectDB()
 
 // Node app initiated
 const app = express()
+
 app.use(bodyParser.json())
 const __dirname = path.resolve()
 // create application/x-www-form-urlencoded parser
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors(
 
-  {
-  origin : process.env.CORS_ALLOWED_ORIGIN,
-  methods: 'GET,POST,PUT,DELETE',
-  credentials:true,
+const corsOptions = {
+  origin: function(origin,callback) {
+    
+    const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS.split(',');
 
-  }
-))
+    if (process.env.NODE_ENV ==='development'){
+      return callback(null,true)
+    }
+
+    if (allowedOrigins.indexOf(origin) !== -1 ){
+      return callback(null, true);
+    }else{
+      return callback(new Error('Not allowed by Cors'),false);
+
+    }
+  },
+  methods: ['GET','POST','PUT','DELETE'],
+  credentials: true,
+};
+
+
+app.use(cors(corsOptions))
 
 app.use(morgan('dev'))
   
